@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using Counter.Models;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Storage;
 
-namespace Counter
+namespace Counter.Views
 {
     public partial class MainPage : ContentPage
     {
