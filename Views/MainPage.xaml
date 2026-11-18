@@ -4,32 +4,65 @@
              x:Class="Counter.Views.MainPage"
              Title="Liczniki">
 
-    <ScrollView>
-        <VerticalStackLayout
+    <VerticalStackLayout
             Padding="30,0"
             Spacing="25">
 
-            <Label Text="Liczniki"
+        <Label Text="Liczniki"
                    FontSize="32"
                    HorizontalOptions="Center"
                    FontAttributes="Bold" />
 
-            <Entry x:Name="nameEntry"
+        <Entry x:Name="nameEntry"
                    Placeholder="Nazwa Licznika" />
 
-            <Button Text="Dodaj Licznik"
+        <Button Text="Dodaj Licznik"
                     Clicked="AddCounter_Clicked" />
-            
-            <BoxView HeightRequest="2"
+
+        <BoxView HeightRequest="2"
                      Margin="0.1"
                      Color="Gray" />
 
-            <Button Text="Zapisz"
+        <Button Text="Zapisz"
                 Clicked="SaveButton_Clicked" />
 
-            <VerticalStackLayout x:Name="countersLayout"
-                                 Spacing="15" />
-        </VerticalStackLayout>
-    </ScrollView>
+        <CollectionView x:Name="countersView"
+                        SelectionMode="None"
+                        HeightRequest="400">
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+
+                    <VerticalStackLayout Spacing="10"
+                                         Padding="0,10">
+                        
+                        <Label Text="{Binding Name}"
+                               FontSize="22"
+                               HorizontalOptions="Center" />
+                        
+                        <Label x:Name="valueLabel"
+                               Text="{Binding Value}"
+                               FontSize="22" 
+                               HorizontalOptions="Center" />
+
+                        <HorizontalStackLayout Spacing="10"
+                                               HorizontalOptions="Center">
+
+                            <Button Text="-"
+                                    Clicked="MinusButton_Clicked"/>
+                            
+                            <Button Text="+"
+                                    Clicked="PlusButton_Clicked"/>
+
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </DataTemplate>
+
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+
+
+    </VerticalStackLayout>
 
 </ContentPage>

@@ -39,69 +39,28 @@ namespace Counter.Views
 
         private void ShowCounters()
         {
-            countersLayout.Children.Clear();
+            countersView.ItemsSource = null;
+            countersView.ItemsSource = counters;
+        }
 
-            foreach (CounterItem counter in counters)
-            {
-                Label nameLabel = new Label {
+        private void MinusButton_Clicked(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            CounterItem counter = (CounterItem)button.BindingContext;
+            counter.Value--;
 
-                    Text = counter.Name,
-                    FontSize = 22,
-                    HorizontalOptions = LayoutOptions.Center
-                };
+            Label label = (Label)((VerticalStackLayout)button.Parent.Parent).Children[1];
+            label.Text = counter.Value.ToString();
+        }
 
-                Label valueLabel = new Label
-                {
+        private void PlusButton_Clicked(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            CounterItem counter = (CounterItem)button.BindingContext;
+            counter.Value++;
 
-                    Text = counter.Value.ToString(),
-                    FontSize = 40,
-                    HorizontalOptions = LayoutOptions.Center
-                };
-
-                Button minusButton = new Button
-                {
-
-                    Text = "-"
-                };
-
-                Button plusButton = new Button
-                {
-
-                    Text = "+"
-                };
-
-                minusButton.Clicked += (sender, e) =>
-                {
-                    counter.Value--;
-                    valueLabel.Text = counter.Value.ToString();
-                };
-
-                plusButton.Clicked += (sender, e) =>
-                {
-                    counter.Value++;
-                    valueLabel.Text = counter.Value.ToString();
-                };
-
-                HorizontalStackLayout buttons = new HorizontalStackLayout
-                {
-                    Spacing = 10,
-                    HorizontalOptions = LayoutOptions.Center
-                };
-
-                buttons.Children.Add(minusButton);
-                buttons.Children.Add(plusButton);
-
-                VerticalStackLayout counterBox = new VerticalStackLayout
-                {
-                    Spacing = 5
-                };
-
-                counterBox.Children.Add(nameLabel);
-                counterBox.Children.Add(valueLabel);
-                counterBox.Children.Add(buttons);
-                countersLayout.Children.Add(counterBox);
-
-            }
+            Label label = (Label)((VerticalStackLayout)button.Parent.Parent).Children[1];
+            label.Text = counter.Value.ToString();
         }
 
         private void SaveButton_Clicked(object sender, EventArgs e)
